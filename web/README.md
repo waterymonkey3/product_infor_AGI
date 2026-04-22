@@ -25,8 +25,8 @@ ProductInfoAGI/
 │   │   └── package.json
 │   │
 │   └── models/                # AI 模型目录（待接入）
-│       ├── main_model/
-│       └── manage_model/
+│       ├── ...
+│       └── ...
 ```
 
 ---
