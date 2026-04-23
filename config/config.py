@@ -5,11 +5,12 @@ from langchain_openai import ChatOpenAI
 
 dotenv.load_dotenv()
 
-chat_model = ChatOpenAI(
+llm = ChatOpenAI(
     model="gpt-5.1-fast",
     base_url=os.getenv("OPENAI_API_BASE"),
     api_key=os.getenv("OPENAI_API_KEY"),
     max_tokens=100,
+    streaming=True,
 )
 
 
@@ -21,8 +22,7 @@ message = "who are you?"
 
 print("message: ", message)
 
-response = chat_model.invoke(message)
+for chunk in llm.stream(message):
+    print(chunk.content, end="", flush=True)
 
-
-print("response: ", response)
 '''

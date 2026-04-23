@@ -1,22 +1,29 @@
 import os
+import sys
 from dotenv import load_dotenv
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
+# 将 config 目录加入路径，导入 AI 模型
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", ".."))
 load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
-# 预留的 AI 模型接口（未来接入时修改此处）
+from config.config import llm
+
+# AI 模型接口（已接入真实模型）
 def call_ai_model(user_message: str, history: list) -> str:
     """
     调用 AI 模型生成回复。
-    当前为模拟返回，未来替换为真实模型调用。
+    当前使用 config/config.py 中配置的模型。
     """
-    # TODO: 接入真实 AI 模型时，替换此处的模拟逻辑
-    # 示例: return openai_chat(user_message, history)
-    return "AI 回复占位：您发送的消息已收到。（实际 AI 返回此处替换）"
+    try:
+        response = llm.invoke(user_message)
+        return response.content
+    except Exception as e:
+        return f"AI 调用失败: {e}"
 
 
 @app.route("/api/chat", methods=["POST"])
