@@ -1,0 +1,2 @@
+OPENAI_API_BASE=https://openai.com/api/v1
+OPENAI_API_KEY=sk-123456

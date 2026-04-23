@@ -7,7 +7,11 @@
 ## 项目结构
 
 ```
-ProductInfoAGI/
+ProductInfoAGI
+├── config/
+|   ├── .env
+|   └── config.py
+|    
 ├── web/
 │   ├── backend/               # Flask 后端
 │   │   ├── app.py             # API 入口，预留 call_ai_model() 接口
